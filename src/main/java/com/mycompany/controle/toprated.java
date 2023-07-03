@@ -35,7 +35,7 @@ import java.util.logging.Logger;
  *
  * @author gutol
  */
-public class trending extends HttpServlet {
+public class toprated extends HttpServlet {
 
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -51,7 +51,7 @@ public class trending extends HttpServlet {
         
         HttpResponse <JsonNode> httpResponse;
         try {
-            httpResponse = Unirest.get("https://api.themoviedb.org/3/trending/all/week?api_key=038055597036fcb70b3cd616cc55c319&language=pt-BR").asJson();
+            httpResponse = Unirest.get("https://api.themoviedb.org/3/movie/top_rated?api_key=038055597036fcb70b3cd616cc55c319&language=pt-BR").asJson();
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             JsonParser jp = new JsonParser();
             JsonElement je = jp.parse(httpResponse.getBody().toString());
@@ -61,7 +61,7 @@ public class trending extends HttpServlet {
             response.getWriter().println(prettyJsonString);
             
         } catch (UnirestException ex) {
-            Logger.getLogger(trending.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(toprated.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
