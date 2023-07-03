@@ -2,6 +2,3 @@ modelos\Erro.class
 modelos\Usuario.class
 com\mycompany\controle\login.class
 controles\UsuarioController.class
-com\mycompany\controle\show.class
-com\mycompany\controle\perfil.class
-com\mycompany\controle\hello.class
