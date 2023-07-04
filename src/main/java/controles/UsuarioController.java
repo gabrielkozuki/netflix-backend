@@ -18,7 +18,6 @@ public class UsuarioController {
     public UsuarioController(){}
     
     public boolean login(Usuario user){
-        
         boolean logado = false;
         
         for(Usuario u: UsuarioController.usuarios){
@@ -28,7 +27,7 @@ public class UsuarioController {
                 
                 //copiar os dados do meu banco de dados para o objeto de retorno do login
                 user.setNome(u.getNome());
-                
+                user.setIdade(u.getIdade());
                 break;
             }
             

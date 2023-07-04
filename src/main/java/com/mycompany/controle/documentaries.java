@@ -30,6 +30,7 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import modelos.Usuario;
 
 /**
  *
@@ -51,8 +52,15 @@ public class documentaries extends HttpServlet {
         
         HttpResponse <JsonNode> httpResponse;
         try {
-            httpResponse = Unirest.get("https://api.themoviedb.org/3/discover/tv?api_key=038055597036fcb70b3cd616cc55c319&with_genres=99&language=pt-BR").asJson();
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            Usuario user = gson.fromJson(request.getReader(), Usuario.class);
+            String url = "https://api.themoviedb.org/3/discover/tv?api_key=038055597036fcb70b3cd616cc55c319&with_genres=99&language=pt-BR";
+            
+            if (user.getIdade() > 18) {
+                url += "&include_adult=true";
+            }
+            
+            httpResponse = Unirest.get(url).asJson();
             JsonParser jp = new JsonParser();
             JsonElement je = jp.parse(httpResponse.getBody().toString());
             String prettyJsonString = gson.toJson(je);

@@ -10,6 +10,7 @@ package com.mycompany.controle;
 
 import com.google.gson.Gson;
 import controles.UsuarioController;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Iterator;
@@ -39,8 +40,8 @@ public class cadastro extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        //COnverte uma string em um objeto no formato indicado
-        Gson gson = new Gson();                       
+        //Converte uma string em um objeto no formato indicado
+        Gson gson = new Gson();
         Usuario user = gson.fromJson(request.getReader(), Usuario.class);
                 
         UsuarioController ucontrol = new UsuarioController();

@@ -9,7 +9,6 @@
 package com.mycompany.controle;
 
 import com.google.gson.*;
-import controles.UsuarioController;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -30,6 +29,8 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.http.HttpSession;
+import modelos.Usuario;
 
 /**
  *
@@ -51,8 +52,18 @@ public class comedy extends HttpServlet {
         
         HttpResponse <JsonNode> httpResponse;
         try {
-            httpResponse = Unirest.get("https://api.themoviedb.org/3/discover/tv?api_key=038055597036fcb70b3cd616cc55c319&with_genres=35&language=pt-BR").asJson();
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            
+            HttpSession session = request.getSession();
+            Usuario user = (Usuario) session.getAttribute("usuario");
+            
+            String url = "https://api.themoviedb.org/3/discover/tv?api_key=038055597036fcb70b3cd616cc55c319&with_genres=35&language=pt-BR";
+            
+            if (user.getIdade() > 18) {
+                url += "&include_adult=true";
+            }
+            
+            httpResponse = Unirest.get(url).asJson();
             JsonParser jp = new JsonParser();
             JsonElement je = jp.parse(httpResponse.getBody().toString());
             String prettyJsonString = gson.toJson(je);

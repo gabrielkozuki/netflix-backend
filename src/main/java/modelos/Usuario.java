@@ -15,7 +15,7 @@ public class Usuario {
     private String email;
     private String senha;
     private String sessionID;
-
+    
     public String getNome() {
         return nome;
     }
