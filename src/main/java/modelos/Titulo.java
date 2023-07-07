@@ -1,17 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package modelos;
 
-/**
- *
- * @author gutol
- */
 public class Titulo {
     private String id;
-    private String name;
+    private String overview;
     private String backdrop_path;
     private String poster_path;
 
@@ -23,12 +15,12 @@ public class Titulo {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getOverview() {
+        return overview;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setOverview(String overview) {
+        this.overview = overview;
     }
 
     public String getBackdrop_path() {
