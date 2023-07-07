@@ -2,7 +2,6 @@
 package controles;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -15,6 +14,7 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
 import modelos.Titulo;
 import modelos.Usuario;
+import patterns.GsonSingleton;
 import patterns.TituloFactory;
 import patterns.TituloTipo1Factory;
 import patterns.TituloTipo2Factory;
@@ -65,7 +65,7 @@ public class TituloController {
             JsonElement je = jp.parse(httpResponse.getBody().toString());
             JsonObject jo = je.getAsJsonObject();
             
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            Gson gson = GsonSingleton.getInstance();
             String jsonString = gson.toJson(jo.get("results"));
             return jsonString;
             
@@ -115,7 +115,7 @@ public class TituloController {
         
         // manipulacao dos titulos...
         
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        Gson gson = GsonSingleton.getInstance();
         String res = gson.toJson(titulos);
         return res;
     }

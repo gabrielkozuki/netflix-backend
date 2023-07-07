@@ -2,7 +2,6 @@
 package com.mycompany.controle;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import controles.TituloController;
 import javax.servlet.http.HttpSession;
 import modelos.Erro;
+import patterns.ErroBuilder;
+import patterns.GsonSingleton;
 
 public class romances extends HttpServlet {
 
@@ -28,11 +29,12 @@ public class romances extends HttpServlet {
             response.getWriter().println(json);
             
         } catch (Exception ex) {
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            Erro erro = new Erro();
-            erro.setDescricao(ex.getMessage());
-            erro.setCodigo("001");
+            Erro erro = new ErroBuilder()
+                .descricao(ex.getMessage())
+                .codigo("001")
+                .build();
             
+            Gson gson = GsonSingleton.getInstance();
             String json = gson.toJson(erro);
             response.getWriter().println(json);
         }

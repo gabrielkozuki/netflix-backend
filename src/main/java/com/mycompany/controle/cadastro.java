@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelos.Erro;
 import modelos.Usuario;
+import patterns.ErroBuilder;
+import patterns.GsonSingleton;
 
 public class cadastro extends HttpServlet {
 
@@ -18,7 +20,7 @@ public class cadastro extends HttpServlet {
             throws ServletException, IOException {
         
         //Converte uma string em um objeto no formato indicado
-        Gson gson = new Gson();
+        Gson gson = GsonSingleton.getInstance();
         Usuario user = gson.fromJson(request.getReader(), Usuario.class);
                 
         UsuarioController ucontrol = new UsuarioController();
@@ -26,11 +28,12 @@ public class cadastro extends HttpServlet {
         if(ucontrol.cadastro(user) != null){
             response.getWriter().println("200");
         }else{
-            Erro erro = new Erro();
-            erro.setDescricao("Erro no cadastro");
-            erro.setCodigo("001");            
+            Erro erro = new ErroBuilder()
+                .descricao("Erro no cadastro")
+                .codigo("001")
+                .build();
             
-            String json = gson.toJson(erro);            
+            String json = gson.toJson(erro);       
             response.getWriter().println(json);
         }               
     }

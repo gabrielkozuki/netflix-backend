@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import modelos.Erro;
 import modelos.Usuario;
+import patterns.ErroBuilder;
+import patterns.GsonSingleton;
 
 public class test extends HttpServlet {
 
@@ -17,7 +19,7 @@ public class test extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        Gson gson = new Gson(); 
+        Gson gson = GsonSingleton.getInstance();
         Usuario usuario = gson.fromJson(request.getReader(), Usuario.class);
         
         System.out.println("Teste: ");
@@ -34,17 +36,16 @@ public class test extends HttpServlet {
             response.getWriter().println(json);
             
         } else {
-            Erro erro = new Erro();
-            erro.setDescricao("Login Não Realizado!");
-            erro.setCodigo("001");            
-      
-            String json = gson.toJson(erro);            
+            Erro erro = new ErroBuilder()
+                .descricao("Login Não Realizado!")
+                .codigo("001")
+                .build();
+            
+            String json = gson.toJson(erro);     
             response.getWriter().println(json);
 
         }
             
     }
-
-    
 
 }
