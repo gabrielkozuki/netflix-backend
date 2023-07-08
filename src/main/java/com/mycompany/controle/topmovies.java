@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import modelos.Erro;
 import patterns.GsonSingleton;
 
-public class toprated extends HttpServlet {
+public class topmovies extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -22,7 +22,7 @@ public class toprated extends HttpServlet {
             TituloController tcontrol = new TituloController();
             HttpSession session = request.getSession();
             
-            String json = tcontrol.getTitulos(session, TituloController.TituloRota.TOPRATED);
+            String json = tcontrol.getTitulos(session, TituloController.TituloRota.TOPMOVIES);
             
             response.setCharacterEncoding("UTF8");
             response.getWriter().println(json);

@@ -21,8 +21,12 @@
         <servlet-class>com.mycompany.controle.netflixoriginals</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>toprated</servlet-name>
-        <servlet-class>com.mycompany.controle.toprated</servlet-class>
+        <servlet-name>topmovies</servlet-name>
+        <servlet-class>com.mycompany.controle.topmovies</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>topseries</servlet-name>
+        <servlet-class>com.mycompany.controle.topseries</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>comedy</servlet-name>
@@ -57,8 +61,12 @@
         <url-pattern>/netflixoriginals</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>toprated</servlet-name>
-        <url-pattern>/toprated</url-pattern>
+        <servlet-name>topmovies</servlet-name>
+        <url-pattern>/topmovies</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>topseries</servlet-name>
+        <url-pattern>/topseries</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>comedy</servlet-name>

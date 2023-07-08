@@ -1,7 +1,7 @@
 
 package modelos;
 
-public class TituloTipo1 extends Titulo {
+public class Serie extends Titulo {
     private String name;
     private String original_name;
 
